@@ -1,11 +1,6 @@
 pipeline {
   agent any
   stages {
-    stage ('scm') {
-      steps {
-        echo "clonning the repo"
-        git branch: 'main', url: 'https://github.com/Angecalais97/carles-project'
-      }
-    }
+    
   }
 }
