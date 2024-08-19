@@ -7,5 +7,13 @@ pipeline {
         git branch: 'main', url: 'https://github.com/Angecalais97/carles-project'
       }
     }
+    stage ('build&test') {
+      steps {
+        sh ''' 
+        java --version
+        '''
+        
+      }
+    }
   }
 }
