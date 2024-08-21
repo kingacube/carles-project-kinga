@@ -13,12 +13,7 @@ pipeline {
       steps {
         sh '''
         mvn --version
-        sudo mkdir -p /var/jenkins_home/maven_repository
-        sudo chown -R automation:automation /var/jenkins_home/maven_repository
-        sudo chmod -R 755 /var/jenkins_home/maven_repository
-        ls -ld /var/jenkins_home/maven_repository
-
-        mvn clean package -Dmaven.repo.local=/var/jenkins_home/maven_repository
+        mvn clean package -Dmaven.repo.local=/opt/demo
         '''
       }
     }
