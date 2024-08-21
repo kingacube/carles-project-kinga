@@ -4,16 +4,16 @@ pipeline {
     maven 'maven'
   }
   stages {
-    stage ('scm'){
+    stage ('SCM') {
       steps {
         git branch: 'main', url: 'https://github.com/Angecalais97/carles-project/'
       }
     }
-    stage ('build,compile,test,package'){
+    stage ('Build, Compile, Test, Package') {
       steps {
-        sh ''' 
+        sh '''
         mvn --version
-        mvn clean package
+        mvn clean package -Dmaven.repo.local=/var/jenkins_home/maven_repository
         '''
       }
     }
