@@ -19,5 +19,9 @@ pipeline {
         
       }
     }
+    stage ('sonar-analysis') {
+      steps {
+        sh ''' 
+        '''
   }
 }
