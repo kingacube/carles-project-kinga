@@ -13,7 +13,7 @@ pipeline {
       steps {
         sh '''
         mvn --version
-        mvn clean package -Dmaven.repo.local=/opt/demo
+        mvn clean package -Dmaven.repo.local=$WORKSPACE/opt/demo
         '''
       }
     }
