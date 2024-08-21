@@ -4,24 +4,18 @@ pipeline {
     maven 'maven'
   }
   stages {
-    stage ('scm') {
+    stage ('scm'){
       steps {
-        echo "clonning the repo"
-        git branch: 'main', url: 'https://github.com/Angecalais97/carles-project'
+        git branch: 'main', url: 'https://github.com/Angecalais97/carles-project/'
       }
     }
-    stage ('build&test') {
+    stage ('build,compile,test,package'){
       steps {
         sh ''' 
-        java --version
+        mvn --version
         mvn clean package
         '''
-        
       }
     }
-    stage ('sonar-analysis') {
-      steps {
-        sh ''' 
-        '''
   }
 }
