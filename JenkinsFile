@@ -4,17 +4,9 @@ pipeline {
     maven 'maven'
   }
   stages {
-    stage ('SCM') {
+    stage ('scm') {
       steps {
-        git branch: 'main', url: 'https://github.com/Angecalais97/carles-project/'
-      }
-    }
-    stage ('Build, Compile, Test, Package') {
-      steps {
-        sh '''
-        mvn --version
-        mvn clean package -Dmaven.repo.local=$WORKSPACE/opt/demo
-        '''
+        git branch: 'main', url: 'https://github.com/Angecalais97/carles-project'
       }
     }
   }
