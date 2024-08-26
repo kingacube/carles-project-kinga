@@ -33,5 +33,31 @@ pipeline {
         }
       }
     }
+    stage ('Docker Build and Push') {
+      steps {
+        script {
+          // Step 1: Build the Docker image
+          sh '''
+          docker build -t s5carles/carles-project:latest .
+          '''
+
+          // Step 2: Run the Docker container (optional)
+          sh '''
+          docker run -d --name carles-container -P s5carles/carles-project:latest
+          '''
+
+          // Step 3: Login to DockerHub
+          sh '''
+          echo $DOCKERHUB_TOKEN | docker login -u s5carles --password-stdin
+          '''
+
+          // Step 4: Push the image to DockerHub
+          sh '''
+          docker push s5carles/carles-project:latest
+          docker ps | carles-container
+          '''
+        }
+      }
+    }
   }
 }
