@@ -26,6 +26,7 @@ pipeline {
           sh '''
           mvn sonar:sonar \
             -Dsonar.projectKey=carles-project \
+            -Dsonar.projectname=carles-project \
             -Dsonar.host.url=https://sonarqube.devopseasylearning.uk \
             -Dsonar.login=$SONARQUBE_TOKEN
           '''
