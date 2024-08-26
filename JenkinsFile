@@ -3,6 +3,9 @@ pipeline {
   tools {
     maven 'maven'
   }
+  environment {
+    SONARQUBE_TOKEN = credentials('let-do-it-sonar')
+  }
   stages {
     stage ('scm') {
       steps {
@@ -15,6 +18,18 @@ pipeline {
         mvn --version
         mvn clean package
         '''
+      }
+    }
+    stage ('SonarQube Analysis') {
+      steps {
+        withSonarQubeEnv('let-do-it') { // SonarQube scanner name in Jenkins configuration
+          sh '''
+          mvn sonar:sonar \
+            -Dsonar.projectKey=carles-project \
+            -Dsonar.host.url=https://sonarqube.devopseasylearning.uk \
+            -Dsonar.login=$SONARQUBE_TOKEN
+          '''
+        }
       }
     }
   }
