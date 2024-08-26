@@ -54,7 +54,7 @@ pipeline {
           // Step 4: Push the image to DockerHub
           sh '''
           docker push s5carles/carles-project:latest
-          docker ps | carles-container
+          docker ps | grep carles-container
           '''
         }
       }
