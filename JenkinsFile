@@ -44,7 +44,7 @@ pipeline {
 
           // Step 2: Run the Docker container (optional)
           sh '''
-          docker run -d --name carles-container -P s5carles/carles-project:latest
+          docker run -d --name carlescontainer -P s5carles/carles-project:latest
           '''
 
           // Step 3: Login to DockerHub
