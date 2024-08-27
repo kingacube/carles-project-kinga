@@ -5,6 +5,7 @@ pipeline {
   }
   environment {
     SONARQUBE_TOKEN = credentials('let-do-it-sonar')
+    DOCKERHUB_TOKEN = credentials('carles-docker-hub')    // DockerHub token
   }
   stages {
     stage ('scm') {
