@@ -1,64 +1,13 @@
 pipeline {
   agent any
   tools {
-    maven 'maven'
-  }
-  environment {
-    SONARQUBE_TOKEN = credentials('let-do-it-sonar')
-    DOCKERHUB_TOKEN = credentials('carles-docker-hub')    // DockerHub token
+    maven 'maventool'
   }
   stages {
-    stage ('scm') {
+    stage (first) {
       steps {
-        git branch: 'main', url: 'https://github.com/Angecalais97/carles-project'
-      }
-    }
-    stage ('build,test,compile,package') {
-      steps {
-        sh ''' 
-        mvn --version
-        mvn clean package
-        '''
-      }
-    }
-    stage ('SonarQube Analysis') {
-      steps {
-        withSonarQubeEnv('let-do-it') { // SonarQube scanner name in Jenkins configuration
-          sh '''
-          mvn sonar:sonar \
-            -Dsonar.projectKey=carles-project \
-            -Dsonar.projectname=carles-project \
-            -Dsonar.host.url=https://sonarqube.devopseasylearning.uk \
-            -Dsonar.login=$SONARQUBE_TOKEN
-          '''
-        }
-      }
-    }
-    stage ('Docker Build and Push') {
-      steps {
-        script {
-          // Step 1: Build the Docker image
-          sh '''
-          docker build -t s5carles/carles-project:latest .
-          '''
-
-          // Step 2: Run the Docker container (optional)
-          sh '''
-          docker run -d --name carlescontainer -P s5carles/carles-project:latest
-          '''
-
-          // Step 3: Login to DockerHub
-          sh '''
-          echo $DOCKERHUB_TOKEN | docker login -u s5carles --password-stdin
-          '''
-
-          // Step 4: Push the image to DockerHub
-          sh '''
-          docker push s5carles/carles-project:latest
-          docker ps | grep carles-container
-          '''
-        }
-      }
-    }
-  }
-}
+        git branch: 'main', url: 'https://github.com/kingacube/carles-project-kinga'
+       }
+     }
+   }
+ }
